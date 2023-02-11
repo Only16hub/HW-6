@@ -10,9 +10,40 @@ let fromconversion;
 let toconversion;
 
 document.addEventListener("DOMContentLoaded", function (event) {
+	loadCurrency1();
+	loadCurrency2();
+
 	document.getElementById("fromconvert").addEventListener("click", FromConv);
 	document.getElementById("toconvert").addEventListener("click", ToConv);
+
+	document
+		.getElementById("currencySwitch")
+		.addEventListener("click", CurrencySwitch);
 });
+
+//load array into the html code
+function loadCurrency1() {
+	currencypicker = document.getElementById("currencypicker");
+
+	for (i = 0; i < currency_value.length; i++) {
+		let opt = document.createElement("option");
+		opt.value = currency_value[i][0];
+		opt.innerHTML = currency_value[i][0];
+		currencypicker.appendChild(opt);
+	}
+}
+
+//load array into the html code
+function loadCurrency2() {
+	currencypicker = document.getElementById("currencypicker2");
+
+	for (i = 0; i < currency_value.length; i++) {
+		let opt = document.createElement("option");
+		opt.value = currency_value[i][0];
+		opt.innerHTML = currency_value[i][0];
+		currencypicker.appendChild(opt);
+	}
+}
 
 function FromConv() {
 	let current_currency = document.getElementById("currencypicker");
@@ -38,6 +69,19 @@ function ToConv() {
 
 			document.getElementById("usdtooutput").value = toconversion.toFixed(2);
 		}
+	}
+}
+
+function CurrencySwitch() {
+	from = document.getElementById("from");
+	to = document.getElementById("to");
+
+	if (to.style.display == "none") {
+		to.style.display = "block";
+		from.style.display = "none";
+	} else if (from.style.display == "none") {
+		from.style.display = "block";
+		to.style.display = "none";
 	}
 }
 

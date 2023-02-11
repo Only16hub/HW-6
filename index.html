@@ -38,29 +38,21 @@
       <!-- make a button after click to switch from one form to other (leave only one) -->
       <div class="to_wrapper">
           <div class="compare_Currency">
-            <div id="left">
+            <div id="from">
         <h3>Amount in USD:</h3>
         <input type="text" id="usdfrominput" name="usdfrominput">
 
         <h3>Select a Currency to Convert to:</h3>
-        <select name="currencypicker" id="currencypicker">
-          <option value="CAD">CAD</option>
-          <option value="EUR">EUR</option>
-          <option value="AUD">AUD</option>
-          <option value="JPY">JPY</option>
+        <select name="currencypicker" id="currencypicker" onload="loadCurrency1()">
         </select><br>
 
         <button id="fromconvert">Convert</button>
         <input type="text" id="usdfromoutput" name="usdfromoutput">
         </div>
 
-        <div id="right">
+        <div id="to" style="display: none;"> 
         <h3>Select a Currency to USD:</h3>
-        <select name="currencypicker" id="currencypicker2">
-          <option value="CAD">CAD</option>
-          <option value="EUR">EUR</option>
-          <option value="AUD">AUD</option>
-          <option value="JPY">JPY</option>
+        <select name="currencypicker" id="currencypicker2" onload="loadCurrency2()">
         </select>
 
         <h3>Currency Amount:</h3>
@@ -69,7 +61,11 @@
         <button id="toconvert">Convert</button>
         <input type="text" id="usdtooutput" name="usdtooutput"><br>
         </div>
+
       </div>
+      <div class="compare_Currency">
+        <button id="currencySwitch">Change converter</button>
+        </div>
     </div>
 
     </div>
