@@ -1,15 +1,11 @@
 //Array with currency name and value
-currency_value = [
-	["CAD", 1.34],
-	["EUR", 0.92],
-	["AUD", 1.44],
-	["JPY", 131.18],
-];
+currency_value = [];
 
 let fromconversion;
 let toconversion;
 
 document.addEventListener("DOMContentLoaded", function (event) {
+	uploadArry();
 	loadCurrency1();
 	loadCurrency2();
 
@@ -19,10 +15,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	document
 		.getElementById("currencySwitch")
 		.addEventListener("click", CurrencySwitch);
-	
-	document.getElementById("managechanger")
-			.addEventListener("click", ManageSwitch);
+
+	document
+		.getElementById("managechanger")
+		.addEventListener("click", ManageSwitch);
 });
+
+//uploading the array's information
+function uploadArry() {
+	//localStorage.clear();
+
+	//check for nay change in array
+	if (localStorage.getItem("element")) {
+		currency_value = JSON.parse(localStorage.getItem("element"));
+	} else {
+		//default value
+		currency_value = [
+			["CAD", 1.34],
+			["EUR", 0.92],
+			["AUD", 1.44],
+			["JPY", 131.18],
+		];
+	}
+}
 
 //load array into the html code
 function loadCurrency1() {
@@ -54,6 +69,7 @@ function loadCurrency2() {
 	}
 }
 
+//convertation from usd to any currency
 function FromConv() {
 	let current_currency = document.getElementById("currencypicker");
 
@@ -68,6 +84,7 @@ function FromConv() {
 	}
 }
 
+//convertation from any currency to usd
 function ToConv() {
 	let current_currency = document.getElementById("currencypicker2");
 
@@ -81,6 +98,7 @@ function ToConv() {
 	}
 }
 
+//switch from one convertation to other
 function CurrencySwitch() {
 	from = document.getElementById("from");
 	to = document.getElementById("to");
@@ -92,6 +110,16 @@ function CurrencySwitch() {
 		from.style.display = "block";
 		to.style.display = "none";
 	}
+
+	clearHome();
+}
+
+//clear all data in home page
+function clearHome() {
+	document.getElementById("usdfrominput").value = "";
+	document.getElementById("usdfromoutput").value = "";
+	document.getElementById("usdtoinput").value = "";
+	document.getElementById("usdtooutput").value = "";
 }
 
 //The most expensive currency
@@ -141,28 +169,38 @@ function showAll() {
 }
 
 //Add New Currency
-function addCurrency(){
-	let name = document.getElementById("nameinput").value;
-	let value = document.getElementById("valueinput").value;
-	currency_value.push([name, value])
+function addCurrency() {
+	let name = document.getElementById("nameinput");
+	let values = document.getElementById("valueinput");
+	currency_value.push([name.value.toUpperCase(), parseInt(values.value)]);
 	loadCurrency1();
 	loadCurrency2();
 
+	////save current currency array
+	localStorage.setItem("element", JSON.stringify(currency_value));
+
+	//clear iputs
+	name.value = "";
+	values.value = "";
 }
 
 //Remove Existing Currency
-function removeCurrency(){
-	let name = document.getElementById("nameinput2").value;
+function removeCurrency() {
+	let name = document.getElementById("nameinput2");
 
 	for (var i = 0; i < currency_value.length; i++) {
-		if (currency_value[i][0] == name) {
-		  currency_value.splice(i, 1);
+		if (currency_value[i][0] == name.value.toUpperCase()) {
+			currency_value.splice(i, 1);
 		}
-	  }
-
+	}
 	loadCurrency1();
 	loadCurrency2();
 
+	//save current currency array
+	localStorage.setItem("element", JSON.stringify(currency_value));
+
+	//clear input
+	name.value = "";
 }
 
 //Change between Create and Delete mode on Manage page
