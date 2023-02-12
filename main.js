@@ -19,11 +19,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	document
 		.getElementById("currencySwitch")
 		.addEventListener("click", CurrencySwitch);
+	
+	document.getElementById("managechanger")
+			.addEventListener("click", ManageSwitch);
 });
 
 //load array into the html code
 function loadCurrency1() {
 	currencypicker = document.getElementById("currencypicker");
+
+	//Clear previous list
+	currencypicker.innerHTML = "";
 
 	for (i = 0; i < currency_value.length; i++) {
 		let opt = document.createElement("option");
@@ -36,6 +42,9 @@ function loadCurrency1() {
 //load array into the html code
 function loadCurrency2() {
 	currencypicker = document.getElementById("currencypicker2");
+
+	//Clear previous list
+	currencypicker.innerHTML = "";
 
 	for (i = 0; i < currency_value.length; i++) {
 		let opt = document.createElement("option");
@@ -128,5 +137,44 @@ function showAll() {
 		element.innerHTML =
 			i + 1 + ". " + currency_value[i][0] + " - $" + currency_value[i][1];
 		list.appendChild(element);
+	}
+}
+
+//Add New Currency
+function addCurrency(){
+	let name = document.getElementById("nameinput").value;
+	let value = document.getElementById("valueinput").value;
+	currency_value.push([name, value])
+	loadCurrency1();
+	loadCurrency2();
+
+}
+
+//Remove Existing Currency
+function removeCurrency(){
+	let name = document.getElementById("nameinput2").value;
+
+	for (var i = 0; i < currency_value.length; i++) {
+		if (currency_value[i][0] == name) {
+		  currency_value.splice(i, 1);
+		}
+	  }
+
+	loadCurrency1();
+	loadCurrency2();
+
+}
+
+//Change between Create and Delete mode on Manage page
+function ManageSwitch() {
+	createCurr = document.getElementById("create");
+	deleteCurr = document.getElementById("delete");
+
+	if (deleteCurr.style.display == "none") {
+		deleteCurr.style.display = "block";
+		createCurr.style.display = "none";
+	} else if (createCurr.style.display == "none") {
+		createCurr.style.display = "block";
+		deleteCurr.style.display = "none";
 	}
 }

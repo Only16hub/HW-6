@@ -132,10 +132,10 @@
     <!-- ======================================================================================== -->
 
 
-
+    </div>
     <!-- ======================================================================================== -->
     <div data-role="page" id="manage">
-
+      
       <!-- =================================== -->
       <!-- header -->
       <div data-role="header" data-theme='b'>
@@ -154,10 +154,43 @@
 
       <!-- =================================== -->
       <!-- content -->
-      <div data-role="content" class="to_content" data-theme='e'>
+      <div data-role="content" class="manage_content" data-theme='e'>
+       
+        <div class="manage_wrapper">
+          <div id="create">
+            <h2>Create and add additional Currencies</h2>
+            <label>Name of Currency</label>
+            <input type="text" id="nameinput" name="nameinput">
 
-      </div>
-      <!-- =================================== -->
+            <label>Value of Currency to USD</label>
+            <input type="text" id="valueinput" name="valueinput">
+            <div class="add">
+              <button type="submit" id="addcurrency" onclick="addCurrency()">Add</button></div>
+          </div>
+          <br>
+
+          <div id="delete", style="display: none;">
+            <h2>Delete Existing Currencies</h2>
+            <label>Name of Currency</label>
+            <input type="text" id="nameinput2" name="nameinput2">
+            
+            <div class="remove">
+              <button type="submit" id="deletecurrency" onclick="removeCurrency()">Delete</button>
+            </div>
+            
+          </div>
+
+          <div class="createordelete">
+            <button id="managechanger"> Change Manager Mode</button>
+          </div> 
+
+          </div>
+
+         
+         
+         
+        </div>
+         <!-- =================================== -->
 
       <!-- =================================== -->
       <!-- notes footer -->
@@ -166,7 +199,11 @@
       </div>
       <!-- =================================== -->
 
+      </div>
+     
+
     </div>
+    
     <!-- ======================================================================================== -->
 
 
