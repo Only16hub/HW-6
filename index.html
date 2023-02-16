@@ -37,36 +37,36 @@
 
       <!-- make a button after click to switch from one form to other (leave only one) -->
       <div class="to_wrapper">
-          <div class="compare_Currency">
-            <div id="from">
-        <h3>Amount in USD:</h3>
-        <input type="text" id="usdfrominput" name="usdfrominput">
+        <div class="compare_Currency">
+          <div id="from">
+            <h3>Amount in USD:</h3>
+            <input type="text" id="usdfrominput" name="usdfrominput">
 
-        <h3>Select a Currency to Convert to:</h3>
-        <select name="currencypicker" id="currencypicker" onload="loadCurrency1()">
-        </select><br>
+            <h3>Select a Currency to Convert to:</h3>
+            <select name="currencypicker" id="currencypicker" onload="loadCurrency1()">
+            </select><br>
 
-        <button id="fromconvert">Convert</button>
-        <input type="text" id="usdfromoutput" name="usdfromoutput" readonly>
+            <button id="fromconvert">Convert</button>
+            <input type="text" id="usdfromoutput" name="usdfromoutput" readonly>
+          </div>
+
+          <div id="to" style="display: none;">
+            <h3>Select a Currency to USD:</h3>
+            <select name="currencypicker" id="currencypicker2" onload="loadCurrency2()">
+            </select>
+
+            <h3>Currency Amount:</h3>
+            <input type="text" id="usdtoinput" name="usdtoinput"><br>
+
+            <button id="toconvert">Convert</button>
+            <input type="text" id="usdtooutput" name="usdtooutput" readonly><br>
+          </div>
+
         </div>
-
-        <div id="to" style="display: none;"> 
-        <h3>Select a Currency to USD:</h3>
-        <select name="currencypicker" id="currencypicker2" onload="loadCurrency2()">
-        </select>
-
-        <h3>Currency Amount:</h3>
-        <input type="text" id="usdtoinput" name="usdtoinput"><br>
-
-        <button id="toconvert">Convert</button>
-        <input type="text" id="usdtooutput" name="usdtooutput" readonly><br>
+        <div class="compare_Currency">
+          <button id="currencySwitch">Change converter</button>
         </div>
-
       </div>
-      <div class="compare_Currency">
-        <button id="currencySwitch">Change converter</button>
-        </div>
-    </div>
 
     </div>
 
@@ -132,82 +132,86 @@
     <!-- ======================================================================================== -->
 
 
+  </div>
+  <!-- ======================================================================================== -->
+  <div data-role="page" id="manage">
+
+    <!-- =================================== -->
+    <!-- header -->
+    <div data-role="header" data-theme='b'>
+      <h2>Currency Converter - Manager</h2>
+
+
+      <div data-role="navbar" data-theme='b'>
+        <ul>
+          <li><a href="#home">Home Page</a></li>
+          <li><a href="#list">Show All</a></li>
+          <li><a href="#manage">Manager</a></li>
+        </ul>
+      </div><!-- /navbar -->
     </div>
-    <!-- ======================================================================================== -->
-    <div data-role="page" id="manage">
-      
-      <!-- =================================== -->
-      <!-- header -->
-      <div data-role="header" data-theme='b'>
-        <h2>Currency Converter - Manager</h2>
+    <!-- =================================== -->
 
+    <!-- =================================== -->
+    <!-- content -->
+    <div data-role="content" class="manage_content" data-theme='e'>
 
-        <div data-role="navbar" data-theme='b'>
-          <ul>
-            <li><a href="#home">Home Page</a></li>
-            <li><a href="#list">Show All</a></li>
-            <li><a href="#manage">Manager</a></li>
-          </ul>
-        </div><!-- /navbar -->
-      </div>
-      <!-- =================================== -->
+      <div class="manage_wrapper">
+        <div id="create">
+          <h2>Create and add additional Currencies</h2>
+          <label>Name of Currency</label>
+          <input type="text" id="nameinput" name="nameinput">
 
-      <!-- =================================== -->
-      <!-- content -->
-      <div data-role="content" class="manage_content" data-theme='e'>
-       
-        <div class="manage_wrapper">
-          <div id="create">
-            <h2>Create and add additional Currencies</h2>
-            <label>Name of Currency</label>
-            <input type="text" id="nameinput" name="nameinput">
-
-            <label>Value of Currency to USD</label>
-            <input type="text" id="valueinput" name="valueinput">
-            <div class="add">
-              <button type="submit" id="addcurrency" onclick="addCurrency()">Add</button></div>
+          <!-- countryinput -->
+          <label>Value of Currency to USD</label>
+          <input type="text" id="valueinput" name="valueinput">
+          <label>Country of Currency</label>
+          <input type="text" id="countryinput" name="countryinput">
+          <div class="add">
+            <button type="submit" id="addcurrency" onclick="addCurrency()">Add</button>
           </div>
-          <br>
-
-          <div id="delete", style="display: none;">
-            <h2>Delete Existing Currencies</h2>
-            <label>Name of Currency</label>
-            <input type="text" id="nameinput2" name="nameinput2">
-            
-            <div class="remove">
-              <button type="submit" id="deletecurrency" onclick="removeCurrency()">Delete</button>
-            </div>
-            
-          </div>
-
-          <div class="createordelete">
-            <button id="managechanger"> Change Manager Mode</button>
-          </div> 
-
-          </div>
-
-         
-         
-         
         </div>
-         <!-- =================================== -->
+        <br>
 
-      <!-- =================================== -->
-      <!-- notes footer -->
-      <div data-role="footer" data-theme='b'>
-        <h3>Copyright 2023 by Daniel and Karim</h3>
-      </div>
-      <!-- =================================== -->
+        <div id="delete" , style="display: none;">
+          <h2>Delete Existing Currencies</h2>
+          <label>Name of Currency</label>
+          <input type="text" id="nameinput2" name="nameinput2">
+
+          <div class="remove">
+            <button type="submit" id="deletecurrency" onclick="removeCurrency()">Delete</button>
+          </div>
+
+        </div>
+
+        <div class="createordelete">
+          <button id="managechanger"> Change Manager Mode</button>
+        </div>
 
       </div>
-     
+
+
+
 
     </div>
-    
-    <!-- ======================================================================================== -->
+    <!-- =================================== -->
+
+    <!-- =================================== -->
+    <!-- notes footer -->
+    <div data-role="footer" data-theme='b'>
+      <h3>Copyright 2023 by Daniel and Karim</h3>
+    </div>
+    <!-- =================================== -->
+
+  </div>
 
 
-    <script src="main.js"></script>
+  </div>
+
+  <!-- ======================================================================================== -->
+
+
+  <script src="main.js"></script>
 </body>
 
 </html>

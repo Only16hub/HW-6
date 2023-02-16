@@ -1,6 +1,15 @@
 //Array with currency name and value
 currency_value = [];
 
+//constructor function
+let ValueItem = function (pName, pValue, pCountry) {
+	this.ID = Math.random().toString(16).slice(5);
+	this.name = pName;
+	this.value = parseFloat(pValue);
+	this.country = pCountry;
+	this.date = new Date().toLocaleString();
+};
+
 let fromconversion;
 let toconversion;
 
@@ -30,13 +39,13 @@ function uploadArry() {
 		currency_value = JSON.parse(localStorage.getItem("element"));
 	} else {
 		//default value
-		currency_value = [
-			["CAD", 1.34],
-			["EUR", 0.92],
-			["AUD", 1.44],
-			["JPY", 131.18],
-		];
+		currency_value.push(new ValueItem("CAD", 1.34, "Canada"));
+		currency_value.push(new ValueItem("EUR", 0.92, "European Union"));
+		currency_value.push(new ValueItem("AUD", 1.44, "Australia"));
+		currency_value.push(new ValueItem("JPY", 13.18, "Japan"));
 	}
+
+	console.log(Math.random().toString(16).slice(5));
 }
 
 //load array into the html code
@@ -48,10 +57,12 @@ function loadCurrency1() {
 
 	for (i = 0; i < currency_value.length; i++) {
 		let opt = document.createElement("option");
-		opt.value = currency_value[i][0];
-		opt.innerHTML = currency_value[i][0];
+		opt.value = currency_value[i].name;
+		opt.innerHTML = currency_value[i].name;
 		currencypicker.appendChild(opt);
 	}
+
+	currencypicker.selectedIndex = -1;
 }
 
 //load array into the html code
@@ -63,24 +74,37 @@ function loadCurrency2() {
 
 	for (i = 0; i < currency_value.length; i++) {
 		let opt = document.createElement("option");
-		opt.value = currency_value[i][0];
-		opt.innerHTML = currency_value[i][0];
+		opt.value = currency_value[i].name;
+		opt.innerHTML = currency_value[i].name;
 		currencypicker.appendChild(opt);
 	}
+
+	currencypicker.selectedIndex = -1;
 }
 
 //convertation from usd to any currency
 function FromConv() {
 	let current_currency = document.getElementById("currencypicker");
 
-	for (i = 0; i < currency_value.length; i++) {
-		if (current_currency.value == currency_value[i][0]) {
-			fromconversion =
-				document.getElementById("usdfrominput").value * currency_value[i][1];
+	if (
+		current_currency.selectedIndex != -1 &&
+		document.getElementById("usdfrominput").value != ""
+	) {
+		for (i = 0; i < currency_value.length; i++) {
+			if (current_currency.value == currency_value[i].name) {
+				fromconversion =
+					document.getElementById("usdfrominput").value *
+					currency_value[i].value;
 
-			document.getElementById("usdfromoutput").value =
-				fromconversion.toFixed(2);
+				document.getElementById("usdfromoutput").value =
+					fromconversion.toFixed(2);
+
+				//Overwrite the old date since we did New convertation
+				currency_value[i].date = new Date().toLocaleString();
+			}
 		}
+	} else {
+		alert("Enter all information first!");
 	}
 }
 
@@ -88,13 +112,23 @@ function FromConv() {
 function ToConv() {
 	let current_currency = document.getElementById("currencypicker2");
 
-	for (i = 0; i < currency_value.length; i++) {
-		if (current_currency.value == currency_value[i][0]) {
-			toconversion =
-				document.getElementById("usdtoinput").value / currency_value[i][1];
+	if (
+		current_currency.selectedIndex != -1 &&
+		document.getElementById("usdtoinput").value != ""
+	) {
+		for (i = 0; i < currency_value.length; i++) {
+			if (current_currency.value == currency_value[i].name) {
+				toconversion =
+					document.getElementById("usdtoinput").value / currency_value[i].value;
 
-			document.getElementById("usdtooutput").value = toconversion.toFixed(2);
+				document.getElementById("usdtooutput").value = toconversion.toFixed(2);
+
+				//Overwrite the old date since we did New convertation
+				currency_value[i].date = new Date().toLocaleString();
+			}
 		}
+	} else {
+		alert("Enter all information first!");
 	}
 }
 
@@ -127,16 +161,16 @@ function expensiveCurrency() {
 	let expensive = 0;
 
 	for (let i = 0; i < currency_value.length; i++) {
-		if (currency_value[i][1] > currency_value[expensive][1]) {
+		if (currency_value[i].value > currency_value[expensive].value) {
 			expensive = i;
 		}
 	}
 
 	document.getElementById("inputExpensive").value =
 		"Currency: " +
-		currency_value[expensive][0] +
+		currency_value[expensive].name +
 		" - $" +
-		currency_value[expensive][1];
+		currency_value[expensive].value;
 }
 
 //The cheapest currency
@@ -144,13 +178,16 @@ function cheapCurrency() {
 	let cheap = 0;
 
 	for (let i = 0; i < currency_value.length; i++) {
-		if (currency_value[i][1] < currency_value[cheap][1]) {
+		if (currency_value[i].value < currency_value[cheap].value) {
 			cheap = i;
 		}
 	}
 
 	document.getElementById("inputCheap").value =
-		"Currency: " + currency_value[cheap][0] + " - $" + currency_value[cheap][1];
+		"Currency: " +
+		currency_value[cheap].name +
+		" - $" +
+		currency_value[cheap].value;
 }
 
 //Show all currency
@@ -163,7 +200,7 @@ function showAll() {
 	for (i = 0; i < currency_value.length; i++) {
 		let element = document.createElement("li");
 		element.innerHTML =
-			i + 1 + ". " + currency_value[i][0] + " - $" + currency_value[i][1];
+			i + 1 + ". " + currency_value[i].name + " - $" + currency_value[i].value;
 		list.appendChild(element);
 	}
 }
@@ -172,7 +209,16 @@ function showAll() {
 function addCurrency() {
 	let name = document.getElementById("nameinput");
 	let values = document.getElementById("valueinput");
-	currency_value.push([name.value.toUpperCase(), parseInt(values.value)]);
+	let country = document.getElementById("countryinput");
+
+	currency_value.push(
+		new ValueItem(
+			name.value.toUpperCase(),
+			parseFloat(values.value),
+			country.value
+		)
+	);
+
 	loadCurrency1();
 	loadCurrency2();
 
@@ -182,6 +228,7 @@ function addCurrency() {
 	//clear iputs
 	name.value = "";
 	values.value = "";
+	country.value = "";
 }
 
 //Remove Existing Currency
@@ -189,7 +236,7 @@ function removeCurrency() {
 	let name = document.getElementById("nameinput2");
 
 	for (var i = 0; i < currency_value.length; i++) {
-		if (currency_value[i][0] == name.value.toUpperCase()) {
+		if (currency_value[i].name == name.value.toUpperCase()) {
 			currency_value.splice(i, 1);
 		}
 	}
