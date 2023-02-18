@@ -199,11 +199,38 @@ function showAll() {
 
 	for (i = 0; i < currency_value.length; i++) {
 		let element = document.createElement("li");
+		element.setAttribute("id", currency_value[i].ID);
 		element.innerHTML =
 			i + 1 + ". " + currency_value[i].name + " - $" + currency_value[i].value;
 		list.appendChild(element);
+
+	// Click feature to show info about specific currency
+		element.onclick = function() {
+			location.href = "#info";
+			let infohead = document.getElementById("info_head");
+			let infobody = document.getElementById("info_body");
+			infohead.innerHTML = "";
+			infobody.innerHTML = "";
+			
+			
+			for(i = 0; i < currency_value.length; i++){
+				if(element.id == currency_value[i].ID){
+			infohead.innerHTML = currency_value[i].country + "'s Currency Info";
+			infobody.innerHTML = "Currency Name: " + currency_value[i].name + "<br>" +
+				                 "Currency Value: $"	+ currency_value[i].value + "<br>" +	
+			                     "Currency's Country: " + currency_value[i].country + "<br>" +
+		                         "Date Added: " + currency_value[i].date + "<br>" +
+	                             "Currency ID: " + currency_value[i].ID + "<br>"	
+
+				 }
+				 
+			}
+			
+		};
 	}
 }
+
+
 
 //Add New Currency
 function addCurrency() {
