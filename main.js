@@ -199,10 +199,14 @@ function showAll() {
 
 	for (i = 0; i < currency_value.length; i++) {
 		let element = document.createElement("li");
+		
 		element.setAttribute("id", currency_value[i].ID);
+		element.setAttribute("class", "wrapper");
 		element.innerHTML =
 			i + 1 + ". " + currency_value[i].name + " - $" + currency_value[i].value;
 		list.appendChild(element);
+		element.style.cursor = "pointer";
+		$(".wrapper").wrap("<a></a>");
 
 	// Click feature to show info about specific currency
 		element.onclick = function() {
