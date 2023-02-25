@@ -156,6 +156,32 @@ function clearHome() {
 	document.getElementById("usdtooutput").value = "";
 }
 
+//Clear the showAll Box
+function clearShowAll() {
+	let list = document.getElementById("ulAll");
+	list.innerHTML = "";
+}
+
+//clear manage inputs
+function clearManageInputs() {
+	createCurr = document.getElementById("create");
+	deleteCurr = document.getElementById("delete");
+
+	if (deleteCurr.style.display == "none") {
+		let input = document.getElementById("nameinput");
+		let input1 = document.getElementById("valueinput");
+		let input2 = document.getElementById("countryinput");
+
+		input.value = null;
+		input1.value = null;
+		input2.value = null;
+	} else if (createCurr.style.display == "none") {
+		let input3 = document.getElementById("nameinput2");
+
+		input3.value = null;
+	}
+}
+
 //The most expensive currency
 function expensiveCurrency() {
 	let expensive = 0;
@@ -199,7 +225,7 @@ function showAll() {
 
 	for (i = 0; i < currency_value.length; i++) {
 		let element = document.createElement("li");
-		
+
 		element.setAttribute("id", currency_value[i].ID);
 		element.setAttribute("class", "wrapper");
 		element.innerHTML =
@@ -208,33 +234,38 @@ function showAll() {
 		element.style.cursor = "pointer";
 		$(".wrapper").wrap("<a></a>");
 
-	// Click feature to show info about specific currency
-		element.onclick = function() {
+		// Click feature to show info about specific currency
+		element.onclick = function () {
 			location.href = "#info";
 			let infohead = document.getElementById("info_head");
 			let infobody = document.getElementById("info_body");
 			infohead.innerHTML = "";
 			infobody.innerHTML = "";
-			
-			
-			for(i = 0; i < currency_value.length; i++){
-				if(element.id == currency_value[i].ID){
-			infohead.innerHTML = currency_value[i].country + "'s Currency Info";
-			infobody.innerHTML = "Currency Name: " + currency_value[i].name + "<br>" +
-				                 "Currency Value: $"	+ currency_value[i].value + "<br>" +	
-			                     "Currency's Country: " + currency_value[i].country + "<br>" +
-		                         "Date Added: " + currency_value[i].date + "<br>" +
-	                             "Currency ID: " + currency_value[i].ID + "<br>"	
 
-				 }
-				 
+			for (i = 0; i < currency_value.length; i++) {
+				if (element.id == currency_value[i].ID) {
+					infohead.innerHTML = currency_value[i].country + "'s Currency Info";
+					infobody.innerHTML =
+						"Currency Name: " +
+						currency_value[i].name +
+						"<br>" +
+						"Currency Value: $" +
+						currency_value[i].value +
+						"<br>" +
+						"Currency's Country: " +
+						currency_value[i].country +
+						"<br>" +
+						"Date Added: " +
+						currency_value[i].date +
+						"<br>" +
+						"Currency ID: " +
+						currency_value[i].ID +
+						"<br>";
+				}
 			}
-			
 		};
 	}
 }
-
-
 
 //Add New Currency
 function addCurrency() {
@@ -242,24 +273,30 @@ function addCurrency() {
 	let values = document.getElementById("valueinput");
 	let country = document.getElementById("countryinput");
 
-	currency_value.push(
-		new ValueItem(
-			name.value.toUpperCase(),
-			parseFloat(values.value),
-			country.value
-		)
-	);
+	if (name.value != "" && values.value != 0 && country.value != "") {
+		currency_value.push(
+			new ValueItem(
+				name.value.toUpperCase(),
+				parseFloat(values.value),
+				country.value
+			)
+		);
 
-	loadCurrency1();
-	loadCurrency2();
+		loadCurrency1();
+		loadCurrency2();
 
-	////save current currency array
-	localStorage.setItem("element", JSON.stringify(currency_value));
+		////save current currency array
+		localStorage.setItem("element", JSON.stringify(currency_value));
 
-	//clear iputs
-	name.value = "";
-	values.value = "";
-	country.value = "";
+		alert(name.value + " - Was successfully added!");
+
+		//clear iputs
+		name.value = "";
+		values.value = "";
+		country.value = "";
+	} else {
+		alert("Please, Enter all information!");
+	}
 }
 
 //Remove Existing Currency
