@@ -5,10 +5,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
   <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+ <link rel="stylesheet" href="css/themes/currencytheme.css" />
 
   <title>Document</title>
 </head>
@@ -16,13 +21,13 @@
 <body>
   <!-- ======================================================================================== -->
 
-  <div data-role="page" id="home">
+  <div data-role="page" id="home" data-theme="a">
 
     <!-- header -->
-    <div data-role="header" data-theme="b">
+    <div data-role="header" data-theme="a">
       <h2>Currency Converter - Home</h2>
 
-      <div data-role="navbar" data-theme='b'>
+      <div data-role="navbar" >
         <ul>
           <li><a href="#home">Home Page</a></li>
           <li><a href="#list">Show All</a></li>
@@ -32,7 +37,7 @@
     </div>
 
     <!-- content -->
-    <div data-role="content" data-theme='e' class="home_Content">
+    <div data-role="content" data-theme='a' class="home_Content">
       <h2 id="home_header">Welcome to our currency converter</h2>
 
       <!-- make a button after click to switch from one form to other (leave only one) -->
@@ -63,7 +68,7 @@
           </div>
 
         </div>
-        <div class="compare_Currency">
+        <div class="compare_Currency" data-theme='a'>
           <button id="currencySwitch">Change converter</button>
         </div>
       </div>
@@ -71,7 +76,7 @@
     </div>
 
     <!-- notes footer -->
-    <div data-role="footer" data-theme='b'>
+    <div data-role="footer" data-theme='a'>
       <h3>Copyright 2023 by Daniel and Karim</h3>
     </div>
   </div>
@@ -79,14 +84,14 @@
 
 
   <!-- ======================================================================================== -->
-  <div data-role="page" id="list">
+  <div data-role="page" id="list" data-theme="a">
 
     <!-- =================================== -->
     <!-- header -->
-    <div data-role="header" data-theme='b'>
+    <div data-role="header" data-theme='a'>
       <h2>Currency Converter - Show All</h2>
 
-      <div data-role="navbar" data-theme='b'>
+      <div data-role="navbar" data-theme='a'>
         <ul>
           <li><a href="#home" onclick="clearShowAll()">Home Page</a></li>
           <li><a href="#list">Show All</a></li>
@@ -99,7 +104,7 @@
 
     <!-- =================================== -->
     <!-- content -->
-    <div data-role="content" class="from_content" data-theme='e'>
+    <div data-role="content" class="from_content" data-theme='a'>
       <div class="from_wrapper">
         <div class="compare_Currency">
           <div id="left">
@@ -124,7 +129,7 @@
 
       <!-- =================================== -->
       <!-- notes footer -->
-      <div data-role="footer" data-theme='b'>
+      <div data-role="footer" data-theme='a'>
         <h3>Copyright 2023 by Daniel and Karim</h3>
       </div>
       <!-- =================================== -->
@@ -134,15 +139,15 @@
 
   </div>
   <!-- ======================================================================================== -->
-  <div data-role="page" id="manage">
+  <div data-role="page" id="manage" data-theme="a">
 
     <!-- =================================== -->
     <!-- header -->
-    <div data-role="header" data-theme='b'>
+    <div data-role="header" data-theme='a'>
       <h2>Currency Converter - Manager</h2>
 
 
-      <div data-role="navbar" data-theme='b'>
+      <div data-role="navbar">
         <ul>
           <li><a href="#home" onclick="clearManageInputs()">Home Page</a></li>
           <li><a href="#list" onclick="clearManageInputs()">Show All</a></li>
@@ -154,7 +159,7 @@
 
     <!-- =================================== -->
     <!-- content -->
-    <div data-role="content" class="manage_content" data-theme='e'>
+    <div data-role="content" class="manage_content" data-theme='a'>
 
       <div class="manage_wrapper">
         <div id="create">
@@ -198,7 +203,7 @@
 
     <!-- =================================== -->
     <!-- notes footer -->
-    <div data-role="footer" data-theme='b'>
+    <div data-role="footer" data-theme='a'>
       <h3>Copyright 2023 by Daniel and Karim</h3>
     </div>
     <!-- =================================== -->
@@ -210,15 +215,15 @@
 
   <!-- ======================================================================================== -->
 
-  <div data-role="page" id="info">
+  <div data-role="page" id="info" data-theme="a">
 
     <!-- =================================== -->
     <!-- header -->
-    <div data-role="header" data-theme='b'>
+    <div data-role="header" data-theme='a'>
       <h2>Currency Converter - Currency Info</h2>
 
 
-      <div data-role="navbar" data-theme='b'>
+      <div data-role="navbar">
         <ul>
           <li><a href="#home">Home Page</a></li>
           <li><a href="#list">Show All</a></li>
@@ -230,7 +235,7 @@
 
     <!-- =================================== -->
     <!-- content -->
-    <div data-role="content" class="currinfo" data-theme='e'>
+    <div data-role="content" class="currinfo" data-theme='a'>
 
       <div class="info_wrapper">
         <div id="info_main">
@@ -253,7 +258,7 @@
 
     <!-- =================================== -->
     <!-- notes footer -->
-    <div data-role="footer" data-theme='b'>
+    <div data-role="footer" data-theme='a'>
       <h3>Copyright 2023 by Daniel and Karim</h3>
     </div>
     <!-- =================================== -->
